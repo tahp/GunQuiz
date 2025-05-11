@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Should You Own a Gun? Quiz</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background: #111;
+      color: #eee;
+    }
+    h1 {
+      text-align: center;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    .question label {
+      display: block;
+      margin: 5px 0;
+    }
+    button {
+      background: #f00;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <h1>Should You Own a Gun?</h1>
+  <form id="quiz">
+    <div class="question">
+      <p>1. How do you respond when someone cuts you off in traffic?</p>
+      <label><input type="radio" name="q1" value="A"> A. Curse, flip them off, forget it</label>
+      <label><input type="radio" name="q1" value="B"> B. Imagine revenge but chill</label>
+      <label><input type="radio" name="q1" value="C"> C. Follow them home</label>
+      <label><input type="radio" name="q1" value="D"> D. Blackout rage drive</label>
+    </div>
+
+    <div class="question">
+      <p>2. You hear a bump in the night. First move?</p>
+      <label><input type="radio" name="q2" value="A"> A. Turn on the light</label>
+      <label><input type="radio" name="q2" value="B"> B. Yell “Who’s there?”</label>
+      <label><input type="radio" name="q2" value="C"> C. Grab a frying pan</label>
+      <label><input type="radio" name="q2" value="D"> D. Fire into the darkness</label>
+    </div>
+
+    <div class="question">
+      <p>3. When you're depressed or anxious, you...</p>
+      <label><input type="radio" name="q3" value="A"> A. Talk it out</label>
+      <label><input type="radio" name="q3" value="B"> B. Cry and scroll</label>
+      <label><input type="radio" name="q3" value="C"> C. Bottle it up</label>
+      <label><input type="radio" name="q3" value="D"> D. Go to a dark place</label>
+    </div>
+
+    <div class="question">
+      <p>4. How’s your memory?</p>
+      <label><input type="radio" name="q4" value="A"> A. Sharp</label>
+      <label><input type="radio" name="q4" value="B"> B. Decent</label>
+      <label><input type="radio" name="q4" value="C"> C. Forgetful</label>
+      <label><input type="radio" name="q4" value="D"> D. Forgot I had a cat</label>
+    </div>
+
+    <div class="question">
+      <p>5. Paranoia level?</p>
+      <label><input type="radio" name="q5" value="A"> A. Chill</label>
+      <label><input type="radio" name="q5" value="B"> B. Reasonable</label>
+      <label><input type="radio" name="q5" value="C"> C. Trust no one</label>
+      <label><input type="radio" name="q5" value="D"> D. Microwave is spying</label>
+    </div>
+
+    <div class="question">
+      <p>6. Drink or use substances?</p>
+      <label><input type="radio" name="q6" value="A"> A. Sober</label>
+      <label><input type="radio" name="q6" value="B"> B. Social use</label>
+      <label><input type="radio" name="q6" value="C"> C. Party hard</label>
+      <label><input type="radio" name="q6" value="D"> D. Married a bong</label>
+    </div>
+
+    <div class="question">
+      <p>7. Why do you want a gun?</p>
+      <label><input type="radio" name="q7" value="A"> A. Protection</label>
+      <label><input type="radio" name="q7" value="B"> B. Power trip</label>
+      <label><input type="radio" name="q7" value="C"> C. It’s pink</label>
+      <label><input type="radio" name="q7" value="D"> D. For the *vibes*</label>
+    </div>
+
+    <button type="submit">Submit</button>
+    <div class="result" id="result"></div>
+  </form>
+
+  <script>
+    const form = document.getElementById('quiz');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      let counts = { A: 0, B: 0, C: 0, D: 0 };
+
+      for (let value of formData.values()) {
+        counts[value]++;
+      }
+
+      const max = Math.max(...Object.values(counts));
+      let top = Object.keys(counts).filter(k => counts[k] === max);
+      top = top[0];
+
+      let message = '';
+      if (top === 'A' || top === 'B') {
+        message = "You *might* be sane enough. Proceed with training and some damn respect.";
+      } else if (top === 'C') {
+        message = "You're on the edge. Start with a Super Soaker and therapy, just to be safe.";
+      } else {
+        message = "Absolutely not. No guns. No Nerf. No sharp sticks. Hug it out, psycho.";
+      }
+
+      result.textContent = message;
+    });
+  </script>
+</body>
+</html>
+
+
